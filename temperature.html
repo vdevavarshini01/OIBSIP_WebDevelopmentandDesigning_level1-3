@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Temperature Converter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background: linear-gradient(
+    rgba(0,0,0,0.3),
+    rgba(0,0,0,0.3)
+  ),
+  url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+  background-size: cover;
+  background-position: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card{
+  background:#ffffff;
+  width:420px;
+  padding:25px 30px;
+  border-radius:12px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.3);
+}
+
+.card h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#333;
+}
+
+.row{
+  display:flex;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.form-group{
+  flex:1;
+}
+
+label{
+  font-size:13px;
+  color:#555;
+  margin-bottom:5px;
+  display:block;
+}
+
+select, input{
+  width:100%;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
+}
+
+input[readonly]{
+  background:#f1f3f5;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  font-size:14px;
+  cursor:pointer;
+  color:#fff;
+}
+
+.convert{
+  background:#0d6efd;
+}
+
+.convert:hover{
+  background:#0b5ed7;
+}
+
+.clear{
+  background:#6c757d;
+}
+
+.clear:hover{
+  background:#5c636a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Temperature Converter</h2>
+
+  <div class="row">
+    <div class="form-group">
+      <label>From</label>
+      <select id="from">
+        <option value="c">Celsius</option>
+        <option value="f">Fahrenheit</option>
+        <option value="k">Kelvin</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>To</label>
+      <select id="to">
+        <option value="f">Fahrenheit</option>
+        <option value="c">Celsius</option>
+        <option value="k">Kelvin</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Input Temperature</label>
+    <input type="number" id="inputTemp" placeholder="Enter temperature">
+  </div>
+
+  <div class="form-group">
+    <label>Result</label>
+    <input type="text" id="result" readonly>
+  </div>
+
+  <div class="buttons">
+    <button class="convert" onclick="convertTemp()">Convert</button>
+    <button class="clear" onclick="clearAll()">Clear</button>
+  </div>
+</div>
+
+<script>
+function convertTemp(){
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+  const input = parseFloat(document.getElementById("inputTemp").value);
+  const resultField = document.getElementById("result");
+
+  if(isNaN(input)){
+    resultField.value = "Enter valid number";
+    return;
+  }
+
+  let celsius;
+
+  // Convert input to Celsius
+  if(from === "c") celsius = input;
+  else if(from === "f") celsius = (input - 32) * 5/9;
+  else celsius = input - 273.15;
+
+  let result;
+
+  // Convert Celsius to target
+  if(to === "c") result = celsius;
+  else if(to === "f") result = (celsius * 9/5) + 32;
+  else result = celsius + 273.15;
+
+  resultField.value = result.toFixed(2);
+}
+
+function clearAll(){
+  document.getElementById("inputTemp").value = "";
+  document.getElementById("result").value = "";
+}
+</script>
+
+</body>
+</html>
