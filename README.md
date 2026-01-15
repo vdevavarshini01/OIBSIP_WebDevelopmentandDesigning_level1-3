@@ -1,1 +1,1 @@
-# OIBSIP_WebDevelopmentandDesigning_level1-3
+This project is a simple temperature converter that allows users to convert values between Celsius, Fahrenheit, and Kelvin. It is designed with a clean interface and focuses on accuracy, ease of use, and responsiveness. The application works smoothly across different devices and provides instant conversion results.
